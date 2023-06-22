@@ -266,27 +266,20 @@ Map (lookup data structure) https://www.scala-lang.org/api/current/scala/collect
 Immutable Collections
 List (linked list, provides fast sequential access) https://www.scala-lang.org/api/current/scala/collection/immutable/List.html
 
-LazyList
- (same as List, except that the tail is evaluated only on demand)
+LazyList (same as List, except that the tail is evaluated only on demand) https://www.scala-lang.org/api/current/scala/collection/immutable/LazyList.html
 
-Vector
- (array-like type, implemented as tree of blocks, provides fast random access)
+Vector (array-like type, implemented as tree of blocks, provides fast random access) https://www.scala-lang.org/api/current/scala/collection/immutable/Vector.html
 
-Range
- (ordered sequence of integers with equal spacing)
+Range (ordered sequence of integers with equal spacing) https://www.scala-lang.org/api/current/scala/collection/immutable/Range.html
 
-String
- (Java type, implicitly converted to a character sequence, so you can treat every string like a Seq[Char])
+String (Java type, implicitly converted to a character sequence, so you can treat every string like a Seq[Char]) https://docs.oracle.com/javase/1.5.0/docs/api/java/lang/String.html
 
-Map
- (collection that maps keys to values)
+Map (collection that maps keys to values) https://www.scala-lang.org/api/current/scala/collection/immutable/Map.html
 
-Set
- (collection without duplicate elements)
+Set (collection without duplicate elements) https://www.scala-lang.org/api/current/scala/collection/immutable/Set.html
 
 Mutable Collections
-Array
- (Scala arrays are native JVM arrays at runtime, therefore they are very performant)
+Array (Scala arrays are native JVM arrays at runtime, therefore they are very performant) https://www.scala-lang.org/api/current/scala/Array.html
 
 Scala also has mutable maps and sets; these should only be used if there are performance issues with immutable types
 
