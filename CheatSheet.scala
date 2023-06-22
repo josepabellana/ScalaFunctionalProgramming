@@ -1,9 +1,9 @@
 
 // Evaluating Rules
-/ *
-* Call by value: evaluates the function arguments before calling the function
-* Call by name: evaluates the function first, and then evaluates the arguments if need be
-* /
+// / *
+// * Call by value: evaluates the function arguments before calling the function
+// * Call by name: evaluates the function first, and then evaluates the arguments if need be
+// * /
 
 def example = 2      // evaluated when called
 val example = 2      // evaluated immediately
@@ -16,11 +16,11 @@ def myFct(bindings: Int*) =  ...  // bindings is a sequence of int, containing a
 
 
 
-/ * High order functions
-* These are functions that take a function as a parameter or return functions.
-* sum takes a function that takes an integer and returns an integer then
-* returns a function that takes two integers and returns an integer
-* / 
+// / * High order functions
+// * These are functions that take a function as a parameter or return functions.
+// * sum takes a function that takes an integer and returns an integer then
+// * returns a function that takes two integers and returns an integer
+// * / 
 def sum(f: Int => Int): (Int, Int) => Int =
   def sumf(a: Int, b: Int): Int = f(a) + f(b)
   sumf
@@ -38,10 +38,10 @@ sum(cube)(1, 10)           // same as above
 
 
 
-/ *
-* Currying
-* Converting a function with multiple arguments into a function with a single argument that returns another function.
-* /
+// / *
+// * Currying
+// * Converting a function with multiple arguments into a function with a single argument that returns another function.
+// * /
 
 val f2: (Int, Int) => Int = f // uncurried version (type is (Int, Int) => Int)
 val f3: Int => Int => Int = f2.curried // transform it to a curried version (type is Int => Int => Int)
@@ -73,12 +73,12 @@ new MyClass(1, 2, 3) // creates a new object of type
 
 
 // End markers
-/ *
-* When the body of a class, object, trait, method or value becomes long, visually
-* inspecting where it ends might become challenging.
-* In these situations, it is possible to explicitly signal to the reader that the body
-* is over using the end keyword with the name of the definition:
-* /
+// / *
+// * When the body of a class, object, trait, method or value becomes long, visually
+// * inspecting where it ends might become challenging.
+// * In these situations, it is possible to explicitly signal to the reader that the body
+// * is over using the end keyword with the name of the definition:
+// * /
 
 class MyClass(a: Int, b: String):
     // body
@@ -102,11 +102,11 @@ end myVal
 
 
 // Operators
-/ *
-* myObject myMethod 1 is the same as calling myObject.myMethod(1)
-* Operator (i.e. function) names can be alphanumeric, symbolic (e.g. x1, *, +?%&, vector_++, counter_=)
-* The precedence of an operator is determined by its first character, with the following increasing order of priority:
-* /
+// / *
+// * myObject myMethod 1 is the same as calling myObject.myMethod(1)
+// * Operator (i.e. function) names can be alphanumeric, symbolic (e.g. x1, *, +?%&, vector_++, counter_=)
+// * The precedence of an operator is determined by its first character, with the following increasing order of priority:
+// * /
 
 (all letters)
 |
@@ -148,18 +148,18 @@ object Hello extends App:
 
 
 // Class Organization
-/ *
-Classes and objects are organized in packages (package myPackage).
+// / *
+// Classes and objects are organized in packages (package myPackage).
 
-They can be referenced through import statements (import myPackage.MyClass, import myPackage.*,
-import myPackage.{MyClass1, MyClass2}, import myPackage.{MyClass1 as A})
+// They can be referenced through import statements (import myPackage.MyClass, import myPackage.*,
+// import myPackage.{MyClass1, MyClass2}, import myPackage.{MyClass1 as A})
 
-They can also be directly referenced in the code with the fully qualified name (new myPackage.MyClass1)
+// They can also be directly referenced in the code with the fully qualified name (new myPackage.MyClass1)
 
-All members of packages scala and java.lang as well as all members of the object scala.Predef are automatically imported.
+// All members of packages scala and java.lang as well as all members of the object scala.Predef are automatically imported.
 
-Traits are similar to Java interfaces, except they can have non-abstract members:
-* /
+// Traits are similar to Java interfaces, except they can have non-abstract members:
+// * /
 trait Planar:
   ...
 class Square extends Shape with Planar
@@ -218,11 +218,11 @@ class Array[+T]:
 
 // Options
 
-/ *
-* Pattern matching can also be used for Option values. Some
-* functions (like Map.get) return a value of type Option[T] which
-* is either a value of type Some[T] or the value None:
-* /
+// / *
+// * Pattern matching can also be used for Option values. Some
+// * functions (like Map.get) return a value of type Option[T] which
+// * is either a value of type Some[T] or the value None:
+// * /
 val myMap = Map("a" -> 42, "b" -> 43)
 def getMapValue(s: String): String =
   myMap get s match
@@ -258,18 +258,13 @@ val chars: List[Char] = pairs.map {
 Scala defines several collection classes:
 
 // Base Classes
-Iterable (collections you can iterate on)https://www.scala-lang.org/api/current/scala/collection/Iterable.html
-
-Seq (ordered sequences)
-
-Set
-
-Map
- (lookup data structure)
+Iterable (collections you can iterate on) https://www.scala-lang.org/api/current/scala/collection/Iterable.html
+Seq (ordered sequences) https://www.scala-lang.org/api/current/scala/collection/Seq.html
+Set https://www.scala-lang.org/api/current/scala/collection/Set.html
+Map (lookup data structure) https://www.scala-lang.org/api/current/scala/collection/Map.html
 
 Immutable Collections
-List
- (linked list, provides fast sequential access)
+List (linked list, provides fast sequential access) https://www.scala-lang.org/api/current/scala/collection/immutable/List.html
 
 LazyList
  (same as List, except that the tail is evaluated only on demand)
