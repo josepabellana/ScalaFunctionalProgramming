@@ -418,3 +418,23 @@ for (x <- 1 to M; y <- 1 to N)
 // is equivalent to
 
 (1 to M).flatMap(x => (1 to N) map (y => (x, y)))
+
+// Translation Rules
+
+// A for-expression looks like a traditional for loop but works differently internally
+// for (x <- e1) yield e2 is translated to e1.map(x => e2)
+// for (x <- e1 if f; s) yield e2 is translated to for (x <- e1.withFilter(x => f); s) yield e2
+// for (x <- e1; y <- e2; s) yield e3 is translated to e1.flatMap(x => for (y <- e2; s) yield e3)
+// Note: s is a (potentially empty) sequence of fields (generators and filters)
+// This means you can use a for-comprehension for your own type, as long
+// as you define map, flatMap and filter.
+
+for
+  i <- 1 until n  
+  j <- 1 until i  
+  if isPrime(i + j)  
+yield (i, j) 
+
+// is equivalent to
+for (i <- 1 until n; j <- 1 until i if isPrime(i + j))
+    yield (i, j)  
