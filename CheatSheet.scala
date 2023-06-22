@@ -14,8 +14,6 @@ def square(x: => Double) // call by name
 def myFct(bindings: Int*) =  ...  // bindings is a sequence of int, containing a varying # of argume
 
 
-
-
 // / * High order functions
 // * These are functions that take a function as a parameter or return functions.
 // * sum takes a function that takes an integer and returns an integer then
@@ -438,3 +436,6 @@ yield (i, j)
 // is equivalent to
 for (i <- 1 until n; j <- 1 until i if isPrime(i + j))
     yield (i, j)  
+
+// is equivalent to
+(1 until n).flatMap(i => (1 until i).filter(j => isPrime(i + j)).map(j => (i, j)))
