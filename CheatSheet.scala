@@ -147,4 +147,151 @@ object Hello extends App:
 
 
 
-// 
+// Class Organization
+/ *
+Classes and objects are organized in packages (package myPackage).
+
+They can be referenced through import statements (import myPackage.MyClass, import myPackage.*,
+import myPackage.{MyClass1, MyClass2}, import myPackage.{MyClass1 as A})
+
+They can also be directly referenced in the code with the fully qualified name (new myPackage.MyClass1)
+
+All members of packages scala and java.lang as well as all members of the object scala.Predef are automatically imported.
+
+Traits are similar to Java interfaces, except they can have non-abstract members:
+* /
+trait Planar:
+  ...
+class Square extends Shape with Planar
+
+// Type Parameters
+// Similar to C++ templates or Java generics. These can apply to classes, traits or functions.
+    class MyClass[T](arg1: T):
+      ...
+
+    MyClass[Int](1)
+    MyClass(1)   // the type is being inferred, i.e. determined based on the value arguments
+
+// It is possible to restrict the type being used, e.g.
+
+    def myFct[T <: TopLevel](arg: T): T = ... // T must derive from TopLevel or be TopLevel
+    def myFct[T >: Level1](arg: T): T = ...   // T must be a supertype of Level1
+    def myFct[T >: Level1 <: TopLevel](arg: T): T = ...
+
+
+// Variance
+// Given A <: B
+// If C[A] <: C[B], C is covariant
+// If C[A] >: C[B], C is contravariant
+// Otherwise C is nonvariant
+
+class C[+A]  // C is covariant
+class C[-A]  // C is contravariant
+class C[A]   // C is nonvariant
+
+// For a function, if A2 <: A1 and B1 <: B2, then A1 => B1 <: A2 => B2.
+// Functions must be contravariant in their argument types and covariant in their result types, e.g.
+
+trait Function1[-T, +U]:
+  def apply(x: T): U
+// Variance check is OK because T is contravariant and U is covariant
+class Array[+T]:
+  def update(x: T) // variance checks fails
+
+// Pattern Matching
+// Pattern matching is used for decomposing data structures:
+  unknownObject match
+  case MyClass(n) => ...
+  case MyClass2(a, b) => ...
+
+// Here are a few example patterns
+
+(someList: List[T]) match
+  case Nil => ...          // empty list
+  case x :: Nil => ...     // list with only one element
+  case List(x) => ...      // same as above
+  case x :: xs => ...      // a list with at least one element. x is bound to the head,
+                           // xs to the tail. xs could be Nil or some other list.
+  case 1 :: 2 :: cs => ... // lists that starts with 1 and then 2
+  case (x, y) :: ps => ... // a list where the head element is a pair
+  case _ => ...            // default case if none of the above matches
+
+// Options
+
+/ *
+* Pattern matching can also be used for Option values. Some
+* functions (like Map.get) return a value of type Option[T] which
+* is either a value of type Some[T] or the value None:
+* /
+val myMap = Map("a" -> 42, "b" -> 43)
+def getMapValue(s: String): String =
+  myMap get s match
+    case Some(nb) => "Value found: " + nb
+    case None => "No value found"
+
+getMapValue("a")  // "Value found: 42"
+getMapValue("c")  // "No value found"
+
+/*
+Most of the times when you write a pattern match on an option value,
+the same expression can be written more concisely using combinator
+methods of the Option class. For example, the function getMapValue
+can be written as follows:
+*/
+def getMapValue(s: String): String =
+  myMap.get(s).map("Value found: " + _).getOrElse("No value found")
+
+// Pattern Matching in Anonymous Functions
+// Pattern matching is also used quite often in anonymous functions:
+val options: List[Option[Char]] = Some('a') :: None :: Some('b') :: Nil
+val chars: List[Char] = pairs.map(p => p match {
+  case Some(ch) => ch
+  case None => 'z'
+})
+// Instead of p => p match { case ... }, you can simply write { case ...}, so the above example becomes more concise:
+val chars: List[Char] = pairs.map {
+  case Some(ch) => ch
+  case None => 'z'
+}
+
+// Collections
+Scala defines several collection classes:
+
+// Base Classes
+Iterable (collections you can iterate on)https://www.scala-lang.org/api/current/scala/collection/Iterable.html
+
+Seq (ordered sequences)
+
+Set
+
+Map
+ (lookup data structure)
+
+Immutable Collections
+List
+ (linked list, provides fast sequential access)
+
+LazyList
+ (same as List, except that the tail is evaluated only on demand)
+
+Vector
+ (array-like type, implemented as tree of blocks, provides fast random access)
+
+Range
+ (ordered sequence of integers with equal spacing)
+
+String
+ (Java type, implicitly converted to a character sequence, so you can treat every string like a Seq[Char])
+
+Map
+ (collection that maps keys to values)
+
+Set
+ (collection without duplicate elements)
+
+Mutable Collections
+Array
+ (Scala arrays are native JVM arrays at runtime, therefore they are very performant)
+
+Scala also has mutable maps and sets; these should only be used if there are performance issues with immutable types
+
