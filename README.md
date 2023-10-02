@@ -32,3 +32,16 @@ Loading MyModule.scala...
 defined module MyModule
 scala> MyModule.abs(-42)
 res0: Int = 42
+
+
+Note that even an expression like 2 + 1 is just calling a member of an object. In that case, what we’re calling is the + member of the object 2. It’s really syntactic sugar for the expression 2.+(1), which passes 1 as an argument to the method + on the object 2.
+
+
+For example, instead of MyModule.abs(42) we can say MyModule abs 42 and get the same result. You can use whichever you find more pleasing in any given case.
+We can bring an object’s member into scope by importing it, which allows us to call it unqualified from then on:
+        scala> import MyModule.abs
+        import MyModule.abs
+        scala> abs(-42)
+        res0: 42
+We can bring all of an object’s (nonprivate) members into scope by using the under- score syntax:
+        import MyModule._
