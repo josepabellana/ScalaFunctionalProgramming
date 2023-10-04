@@ -45,6 +45,3 @@ We can bring an object’s member into scope by importing it, which allows us to
         res0: 42
 We can bring all of an object’s (nonprivate) members into scope by using the under- score syntax:
         import MyModule._
-
-
-
