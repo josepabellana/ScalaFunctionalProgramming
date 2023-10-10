@@ -6,3 +6,5 @@ def findFirst(ss: Array[String], key: String): Int = {
         else loop(n + 1)
     loop(0)
 }
+
+// inner call no stack created
