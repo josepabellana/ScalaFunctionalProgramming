@@ -18,9 +18,9 @@ def findFirst[A](as: Array[A], p: A => Boolean): Int = {
 }
 def isSorted[A](as: Array[A], ordered: (A,A) => Boolean): Boolean = {
     @annotation.tailrec
-    def loop(n: Int): Int =
-        if (n >= as.length -1) true
-        else if (!ordered(as(n), as(n+1))) false
+    def loop(n: Int): Boolean =
+        if (n+1 > as.length) True
+        else if (!ordered(as(n), as(n+1))) False
         else loop(n+1)
     loop(0)
 }
