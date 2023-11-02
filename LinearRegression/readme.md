@@ -1,0 +1,1 @@
+To install dependencies: https://medium.com/free-code-camp/installing-scala-and-apache-spark-on-mac-os-837ae57d283f#.hv79xf5ri
