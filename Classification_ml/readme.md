@@ -16,3 +16,8 @@ The sigmoid(aa Logistic) Function takes in any value and utputs it to be between
 
 Formula = Beta(z) = 1 / (1 + e^-z)
 No matter the value you input of z its always going to return a value between 0 and 1.
+
+
+## Confusion Matrix
+
+[Confusion Matrix](conf_matrix.png)
